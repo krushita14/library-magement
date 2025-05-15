@@ -29,8 +29,8 @@ public class BookController {
     }
 
     @PostMapping
-    public Books addBook(@Valid @RequestBody Books book) {
-        return bookService.addBook(book);
+    public List<Books> addBook(@Valid @RequestBody List<Books> books) {
+        return bookService.addBook(books);
     }
 
     @PutMapping("/{id}")
@@ -42,5 +42,10 @@ public class BookController {
     public ResponseEntity<Void> deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public List<Books> searchBooksByTitle(@RequestParam String title) {
+        return bookService.searchBooksByTitle(title);
     }
 }
